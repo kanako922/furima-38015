@@ -1,15 +1,15 @@
 window.addEventListener('load', () => {
 
-  const inputPrice = document.getElementById("item-price");
+  const priceInput = document.getElementById("item-price");
 
-  inputPrice.addEventListener('keyup',() => {
-    const inputValue = inputPrice.value;
+  priceInput.addEventListener('input',() => {
+    const inputValue = priceInput.value;
 
-    const addTax = document.getElementById("add-tax-price");
-    addTax.innerHTML = Math.floor(inputValue * 0.1);
+    const addTaxDom = document.getElementById("add-tax-price");
+    addTaxDom.innerHTML = Math.floor(inputValue * 0.1);
 
-    const addProfit = document.getElementById("profit");
-    addProfit.innerHTML = Math.floor(inputValue - addTax.innerHTML);
+    const profitDom = document.getElementById("profit");
+    profitDom.innerHTML = Math.floor(inputValue - addTaxDom.innerHTML);
 
   });
 

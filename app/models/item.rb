@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :delivery_date
 
-  validates :name, :description, :user_id, presence: true
+  validates :name, :description, :image, presence: true
   validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 
   with_options presence: true, numericality: { other_than: 0, message: "can't be blank" } do
