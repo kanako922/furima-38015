@@ -26,8 +26,8 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Zip code can't be blank")
       end
-      it "prefecture_idが空では購入できない" do
-        @order_address.prefecture_id = ""
+      it "prefectureが--では購入できない" do
+        @order_address.prefecture_id = "0"
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Prefecture can't be blank")
       end
@@ -61,7 +61,17 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Zip code is invalid")
       end
-      it "telは10桁以上11桁以内の半角数値のみ保存可能" do
+      it "telが9桁以下では購入できない" do
+        @order_address.tel = "12345678"
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Tel is invalid")
+      end
+      it "telが12桁以上では購入できない" do
+        @order_address.tel = "123456789012"
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Tel is invalid")
+      end
+      it "telが半角数字以外が含まれている場合は購入できない" do
         @order_address.tel = "123-4567-8901"
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Tel is invalid")
